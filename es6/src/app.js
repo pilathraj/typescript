@@ -1,35 +1,26 @@
-class Drone{
-  constructor(id, name){
-    this._id = id;
-    this.name = name;
+import $ from 'jquery';
+
+import {fleet} from './fleet-data.js';
+import {FleetDataService} from './services/fleet-data-service.js';
+import {BaseApplication} from './framework/base-application.js';
+import {HomePage} from './home-page.js';
+import {CarsPage} from './cars-page.js';
+import {DronesPage} from './drones-page.js';
+import {MapPage} from './map-page.js';
+
+export class App extends BaseApplication{
+  constructor(){
+    super('Fleet Manager');
+    this.dataService = new FleetDataService();
+    this.dataService.loadData(fleet);    
+    this.addRoute('Home', new HomePage(), true);
+    this.addRoute('Cars', new CarsPage());
+    this.addRoute('Drones', new DronesPage());
+    this.addRoute('Map', new MapPage());
   }
-  static getCompany(){
-    console.log("getCompany in");
-  }
-  fly(){
-    console.log("Drone id#"+this._id+" is flying");
-  }
-  
-  get id(){
-    return this._id;
-  }
-  
-  set id(value){
-    this._id = value;
-  }
-  
 }
-Drone.maxHeight = 2000;
+
+export let application = new App();
+application.show($('body'));
 
 
-let drone = new Drone('123', "Pilathraj");
-
-console.log(typeof Drone);
-console.log(typeof drone);
-console.log(drone instanceof Drone);
-drone.id = 1312312;
-console.log('Drone: #'+drone.id+" Name: "+drone.name);
-console.log(Drone.maxHeight);
-console.log(drone.maxHeight);
-drone.fly();
-Drone.getCompany(); 

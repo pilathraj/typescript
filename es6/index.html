@@ -1,12 +1,31 @@
+<!DOCTYPE html>
 <html>
   <head>
-    <title>Cars</title>
+    <title>Drones</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="/node_modules/material-design-lite/dist/material.css">
+
     <script src="node_modules/traceur/bin/traceur.js"></script>
-    <script src="node_modules/es6-module-loader/dist/es6-module-loader-dev.js"></script>
+    <script src="node_modules/systemjs/dist/system.js"></script>
+    <script src="node_modules/material-design-lite/dist/material.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCghi96U9vuzK-Ntm2U8i4AX3Bsop2oH-g&callback=googleMapsCallback"
+    async defer></script>
+   
+    
   </head>
   <body>
-    <script>
-      System.import('src/app.js');
-    </script>
+      <script>
+      function googleMapsCallback(){
+            System.config({
+              transpiler: "plugin-babel",
+              map: {
+              "plugin-babel": "./node_modules/systemjs-plugin-babel/plugin-babel.js",
+              'systemjs-babel-build': './node_modules/systemjs-plugin-babel/systemjs-babel-browser.js',
+              'jquery': './node_modules/jquery/dist/jquery.min.js'
+              }
+              });              
+          System.import('src/app.js');
+         }         
+      </script> 
   </body>
 </html>
